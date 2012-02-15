@@ -679,7 +679,7 @@ class Parser(object):
       # Delete the node which was created previously.
       # There is no declaration of var or array.
       del node
-      raise LanguageSyntaxError
+      raise
 
     ident = self.__parse_abstract_ident(node)
     self.symbol_table[self.__current_scope][ident] = dimensions
