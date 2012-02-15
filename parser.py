@@ -673,7 +673,13 @@ class Parser(object):
   def __parse_abstract_var_decl(self, parent):
     node = Node('abstract', 'varDecl', parent)
 
-    dimensions = self.__parse_abstract_type_decl(node)
+    try:
+      dimensions = self.__parse_abstract_type_decl(node)
+    except LanguageSyntaxError:
+      # Delete the node which was created previously.
+      # There is no declaration of var or array.
+      del node
+      raise LanguageSyntaxError
 
     ident = self.__parse_abstract_ident(node)
     self.symbol_table[self.__current_scope][ident] = dimensions
