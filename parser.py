@@ -676,9 +676,9 @@ class Parser(object):
     try:
       dimensions = self.__parse_abstract_type_decl(node)
     except LanguageSyntaxError:
-      # Delete the node which was created previously.
-      # There is no declaration of var or array.
-      del node
+      # Remove the node which was added previously 
+      # since there is no declaration of var or array.
+      parent.children.remove(node)
       raise
 
     ident = self.__parse_abstract_ident(node)
